@@ -26,6 +26,28 @@ class Address extends Model
         'number'
     ];
 
+    public static function buildCreate($address) {
+        $state = State::firstOrCreate([
+            'name' => $address['state'],
+        ]);
+        $city = City::firstOrCreate([
+            'name' => $address['city'],
+            'state_id' => $state->id,
+        ]);
+        $neighborhood = Neighborhood::firstOrCreate([
+            'name' => $address['neighborhood'],
+            'city_id' => $city->id,
+            'state_id' => $state->id,
+        ]);
+        return static::firstOrCreate([
+            'street' => $address['street'],
+            'number' => $address['number'],
+            'state_id' => $state->id,
+            'city_id' => $city->id,
+            'neighborhood_id' => $neighborhood->id,
+        ]);
+    }
+
     /**
      * Get state.
      */
