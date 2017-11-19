@@ -22,6 +22,7 @@ class Address extends Model
         'state_id',
         'city_id',
         'neighborhood_id',
+        'zip_code',
         'street',
         'number'
     ];
@@ -40,6 +41,7 @@ class Address extends Model
             'state_id' => $state->id,
         ]);
         return static::firstOrCreate([
+            'zip_code' => $address['zip_code'],
             'street' => $address['street'],
             'number' => $address['number'],
             'state_id' => $state->id,

@@ -41,6 +41,8 @@ class CreateLaralumAddresses extends Migration
             $table->integer('city_id');
             $table->integer('neighborhood_id');
             $table->string('street');
+            $table->string('zip_code');
+            $table->string('number');
             $table->timestamps();
         });
     }

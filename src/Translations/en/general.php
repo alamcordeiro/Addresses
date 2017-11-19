@@ -12,6 +12,7 @@ return [
     'state'        => 'State',
     'city'         => 'City',
     'neighborhood' => 'Neighborhood',
+    'zip_code'     => 'Zip Code',
     'street'       => 'Street',
     'number'       => 'Number',
 
