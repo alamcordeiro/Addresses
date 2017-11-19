@@ -1,0 +1,20 @@
+{
+    "name": "laralum/addresses",
+    "description": "Address module for laralum",
+    "require": {
+		"laralum/laralum": "1.*"
+	},
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alan Cordeiro",
+            "email": "alan@cordeiro.me"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Laralum\\Addresses\\": "./src"
+        }
+    },
+    "minimum-stability": "dev"
+}
