@@ -50,14 +50,14 @@ class Address extends Model
                 'city_id' => $city->id,
                 'state_id' => $state->id,
             ]);
-            $insert['neighborhood_id'] = $district->id;
+            $insert['district_id'] = $district->id;
         }
 
-        $insert['street'] = $address['street'] ?? null;
-        $insert['number'] = $address['number'] ?? null;
+        if(isset($address['street'])) $insert['street'] = $address['street'];
+        if(isset($address['number'])) $insert['number'] = $address['number'];
 
-        $insert['address_line1'] = $address['address_line1'] ?? null;
-        $insert['address_line2'] = $address['address_line2'] ?? null;
+        if(isset($address['address_line1'])) $insert['address_line1'] = $address['address_line1'];
+        if(isset($address['address_line2'])) $insert['address_line2'] = $address['address_line2'];
 
         return static::firstOrCreate($insert);
     }
