@@ -21,7 +21,7 @@ class Address extends Model
     protected $fillable = [
         'state_id',
         'city_id',
-        'neighborhood_id',
+        'district_id',
         'zip_code',
         'street',
         'number',
@@ -44,13 +44,13 @@ class Address extends Model
             'city_id' => $city->id,
         ];
 
-        if(isset($address['neighborhood'])) {
-            $neighborhood = Neighborhood::firstOrCreate([
-                'name' => $address['neighborhood'],
+        if(isset($address['district'])) {
+            $district = District::firstOrCreate([
+                'name' => $address['district'],
                 'city_id' => $city->id,
                 'state_id' => $state->id,
             ]);
-            $insert['neighborhood_id'] = $neighborhood->id;
+            $insert['neighborhood_id'] = $district->id;
         }
 
         $insert['street'] = $address['street'] ?? null;
@@ -79,11 +79,11 @@ class Address extends Model
     }
 
     /**
-     * Get neighborhood.
+     * Get district.
      */
-    public function neighborhood()
+    public function district()
     {
-        return $this->belongsTo('Laralum\Addresses\Models\Neighborhood');
+        return $this->belongsTo('Laralum\Addresses\Models\District');
     }
 
 }

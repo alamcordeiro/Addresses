@@ -27,7 +27,7 @@ class CreateLaralumAddresses extends Migration
             $table->timestamps();
         });
 
-        Schema::create('laralum_addresses_neighborhood', function (Blueprint $table) {
+        Schema::create('laralum_addresses_districts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('state_id');
@@ -39,10 +39,10 @@ class CreateLaralumAddresses extends Migration
             $table->increments('id');
             $table->integer('state_id');
             $table->integer('city_id');
-            $table->integer('neighborhood_id')->nullable();
+            $table->integer('district_id')->nullable();
             $table->string('street')->nullable();
             $table->string('zip_code')->nullable();
-            $table->string('number')->nullable();
+            $table->integer('number')->nullable();
             $table->string('address_line1')->nullable();
             $table->string('address_line2')->nullable();
             $table->timestamps();
@@ -58,7 +58,7 @@ class CreateLaralumAddresses extends Migration
     {
         Schema::dropIfExists('laralum_addresses_state');
         Schema::dropIfExists('laralum_addresses_city');
-        Schema::dropIfExists('laralum_addresses_neighborhood');
+        Schema::dropIfExists('laralum_addresses_districts');
         Schema::dropIfExists('laralum_addresses_address');
     }
 }
