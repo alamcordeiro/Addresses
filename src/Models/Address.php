@@ -24,7 +24,9 @@ class Address extends Model
         'neighborhood_id',
         'zip_code',
         'street',
-        'number'
+        'number',
+        'address_line1',
+        'address_line2',
     ];
 
     public static function buildCreate($address) {
@@ -35,19 +37,29 @@ class Address extends Model
             'name' => $address['city'],
             'state_id' => $state->id,
         ]);
-        $neighborhood = Neighborhood::firstOrCreate([
-            'name' => $address['neighborhood'],
-            'city_id' => $city->id,
-            'state_id' => $state->id,
-        ]);
-        return static::firstOrCreate([
+
+        $insert = [
             'zip_code' => $address['zip_code'],
-            'street' => $address['street'],
-            'number' => $address['number'],
             'state_id' => $state->id,
             'city_id' => $city->id,
-            'neighborhood_id' => $neighborhood->id,
-        ]);
+        ];
+
+        if(isset($address['neighborhood'])) {
+            $neighborhood = Neighborhood::firstOrCreate([
+                'name' => $address['neighborhood'],
+                'city_id' => $city->id,
+                'state_id' => $state->id,
+            ]);
+            $insert['neighborhood_id'] = $neighborhood->id;
+        }
+
+        $insert['street'] = $address['street'] ?? null;
+        $insert['number'] = $address['number'] ?? null;
+
+        $insert['address_line1'] = $address['address_line1'] ?? null;
+        $insert['address_line2'] = $address['address_line2'] ?? null;
+
+        return static::firstOrCreate($insert);
     }
 
     /**
